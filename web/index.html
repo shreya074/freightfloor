@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="theme-color" content="#f5f3e9" />
+    <title>Freightfloor · Dispatch console</title>
+    <link rel="stylesheet" href="/web/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="mast">
+        <a class="brand" href="/" aria-label="Freightfloor home"
+          ><span class="mark" aria-hidden="true"><i></i><i></i><i></i></span
+          >Freightfloor</a
+        ><a class="source" href="https://github.com/chaitanyature/freightfloor"
+          >Repository ↗</a
+        >
+      </div>
+    </header>
+    <main>
+      <div class="titlebar">
+        <div>
+          <label for="scenario">Warehouse scenario</label>
+          <h1>
+            <select id="scenario" aria-label="Warehouse scenario">
+              <option value="crossdock">Crossdock exchange</option>
+              <option value="passing-bay">Single passing bay</option>
+              <option value="four-way">Four-way crossing</option></select
+            ><span aria-hidden="true">⌄</span>
+          </h1>
+        </div>
+        <div class="edit-actions">
+          <button id="cancel" hidden>Cancel edits</button
+          ><button id="edit">Edit floor</button>
+        </div>
+      </div>
+      <div class="layout">
+        <section class="replay" aria-label="Floor replay">
+          <div class="panelhead">
+            <h2>Route replay</h2>
+            <label class="switch"
+              ><input id="trails" type="checkbox" checked /> Show routes</label
+            >
+          </div>
+          <div class="floor">
+            <canvas
+              id="floor"
+              tabindex="0"
+              aria-label="Warehouse floor. In edit mode use arrow keys and Space to toggle a rack."
+            ></canvas>
+          </div>
+          <div class="playback">
+            <div class="timehead">
+              <label for="timeline">Timeline</label
+              ><output id="readout" for="timeline">0 / 0 ticks</output>
+            </div>
+            <input
+              id="timeline"
+              type="range"
+              min="0"
+              max="1"
+              step="1"
+              value="0"
+              aria-label="Replay tick"
+            />
+            <div class="transport">
+              <div class="buttons">
+                <button id="play" class="primary">▶ Play</button
+                ><button id="step">Step +1</button
+                ><button id="rewind" aria-label="Rewind to tick zero">↺</button>
+              </div>
+              <label class="speed"
+                >Speed
+                <select id="speed">
+                  <option value="1">1×</option>
+                  <option value="2">2×</option>
+                  <option value="4">4×</option>
+                </select></label
+              >
+            </div>
+          </div>
+          <p class="feedback" id="feedback" role="status"></p>
+        </section>
+        <aside>
+          <div class="panelhead">
+            <h2>Schedule</h2>
+            <span id="state">Planning</span>
+          </div>
+          <div class="metrics">
+            <div>
+              <span>Arrival cost</span><strong id="cost">—</strong
+              ><small>robot-ticks</small>
+            </div>
+            <div>
+              <span>Makespan</span><strong id="makespan">—</strong
+              ><small>ticks</small>
+            </div>
+          </div>
+          <div class="roster">
+            <h2>Robots</h2>
+            <div id="robots"></div>
+          </div>
+          <dl class="searchstats">
+            <div>
+              <dt>Initial conflicts</dt>
+              <dd id="conflicts">—</dd>
+            </div>
+            <div>
+              <dt>CBS nodes expanded</dt>
+              <dd id="expanded">—</dd>
+            </div>
+            <div>
+              <dt>Safe-interval searches</dt>
+              <dd id="searches">—</dd>
+            </div>
+          </dl>
+        </aside>
+      </div>
+    </main>
+    <script type="module" src="/web/app.js"></script>
+  </body>
+</html>
